@@ -86,6 +86,9 @@ public class StreamManagerTest {
     @Mock
     private Configuration configuration;
 
+    @Mock
+    private org.apache.flink.configuration.Configuration flinkConfiguration;
+
     @Before
     public void setup() {
 
@@ -110,6 +113,7 @@ public class StreamManagerTest {
         when(env.getConfig()).thenReturn(executionConfig);
         when(env.getCheckpointConfig()).thenReturn(checkpointConfig);
         when(tableEnvironment.getConfig()).thenReturn(tableConfig);
+        when(tableEnvironment.getConfig().getConfiguration()).thenReturn(flinkConfiguration);
         when(env.fromSource(any(KafkaSource.class), any(WatermarkStrategy.class), any(String.class))).thenReturn(source);
         when(source.getType()).thenReturn(typeInformation);
         when(typeInformation.getTypeClass()).thenReturn(Row.class);
