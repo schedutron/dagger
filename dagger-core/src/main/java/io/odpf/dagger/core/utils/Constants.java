@@ -148,4 +148,7 @@ public class Constants {
 
     public static final long MAX_EVENT_LOOP_EXECUTE_TIME_DEFAULT = 10000;
     public static final int LONGBOW_OUTPUT_ADDITIONAL_ARITY = 3;
+
+    public static final String PYTHON_FILES_KEY = "python.files";
+    public static final String PYTHON_FILES_DEFAULT = "";
 }

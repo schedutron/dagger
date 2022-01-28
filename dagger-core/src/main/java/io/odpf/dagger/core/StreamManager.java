@@ -82,6 +82,15 @@ public class StreamManager {
 
 
         tableEnvironment.getConfig().setIdleStateRetention(Duration.ofHours(configuration.getInteger(FLINK_RETENTION_IDLE_STATE_HOUR_KEY, FLINK_RETENTION_IDLE_STATE_HOUR_DEFAULT)));
+
+        tableEnvironment.getConfig().getConfiguration().setString(PYTHON_FILES_KEY, PYTHON_FILES_DEFAULT);
+//        tableEnvironment.getConfig().getConfiguration().setString("python.files", "/Users/jpandawa/Documents/python/test_class_function.py");
+//        tableEnvironment.getConfig().getConfiguration().setString("python.client.executable", "/Users/jpandawa/.pyenv/versions/3.8.5/bin/python");
+//        tableEnvironment.getConfig().getConfiguration().setString("python.executable", "/Users/jpandawa/.pyenv/versions/3.8.5/bin/python");
+        /*pass here the function.py and the name of the function into the python script*/
+        tableEnvironment.executeSql("CREATE TEMPORARY FUNCTION AddTest AS 'udf.test_function.add_test' LANGUAGE PYTHON");
+        tableEnvironment.executeSql("CREATE TEMPORARY FUNCTION AddTestTwo AS 'udaf.test_function_2.add_test2' LANGUAGE PYTHON");
+//        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTestData AS 'test_class_function.AddTestData' LANGUAGE PYTHON");
         return this;
     }
 
