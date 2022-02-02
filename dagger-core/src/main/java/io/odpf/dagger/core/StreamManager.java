@@ -88,8 +88,8 @@ public class StreamManager {
 //        tableEnvironment.getConfig().getConfiguration().setString("python.client.executable", "/Users/jpandawa/.pyenv/versions/3.8.5/bin/python");
 //        tableEnvironment.getConfig().getConfiguration().setString("python.executable", "/Users/jpandawa/.pyenv/versions/3.8.5/bin/python");
         /*pass here the function.py and the name of the function into the python script*/
-        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTest AS 'udf.test_function.add_test' LANGUAGE PYTHON");
-        tableEnvironment.executeSql("CREATE TEMPORARY FUNCTION AddTestTwo AS 'udaf.test_function_2.add_test2' LANGUAGE PYTHON");
+        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTest AS 'test_function.add_test' LANGUAGE PYTHON");
+        tableEnvironment.executeSql("CREATE TEMPORARY FUNCTION AddTestTwo AS 'test_function_2.add_test2' LANGUAGE PYTHON");
 //        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTestData AS 'test_class_function.AddTestData' LANGUAGE PYTHON");
         return this;
     }
