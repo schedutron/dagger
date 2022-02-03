@@ -81,15 +81,16 @@ public class StreamManager {
         executionEnvironment.getConfig().setGlobalJobParameters(configuration.getParam());
 
 
+
         tableEnvironment.getConfig().setIdleStateRetention(Duration.ofHours(configuration.getInteger(FLINK_RETENTION_IDLE_STATE_HOUR_KEY, FLINK_RETENTION_IDLE_STATE_HOUR_DEFAULT)));
 
-        tableEnvironment.getConfig().getConfiguration().setString(PYTHON_FILES_KEY, "/opt/flink/lib/python_udf.zip");
+//        tableEnvironment.getConfig().getConfiguration().setString(PYTHON_FILES_KEY, "/opt/flink/lib/python_udf.zip");
 //        tableEnvironment.getConfig().getConfiguration().setString("python.files", "/Users/jpandawa/Documents/python/python_udf.zip");
 //        tableEnvironment.getConfig().getConfiguration().setString("python.client.executable", "/Users/jpandawa/.pyenv/versions/3.8.5/bin/python");
 //        tableEnvironment.getConfig().getConfiguration().setString("python.executable", "/Users/jpandawa/.pyenv/versions/3.8.5/bin/python");
-        /*pass here the function.py and the name of the function into the python script*/
-        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTest AS 'test_function.add_test' LANGUAGE PYTHON");
-        tableEnvironment.executeSql("CREATE TEMPORARY FUNCTION AddTestTwo AS 'test_function_2.add_test2' LANGUAGE PYTHON");
+//        /*pass here the function.py and the name of the function into the python script*/
+//        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTest AS 'test_function.add_test' LANGUAGE PYTHON");
+//        tableEnvironment.executeSql("CREATE TEMPORARY FUNCTION AddTestTwo AS 'test_function_2.add_test2' LANGUAGE PYTHON");
 //        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTestData AS 'test_class_function.AddTestData' LANGUAGE PYTHON");
         return this;
     }
@@ -152,6 +153,18 @@ public class StreamManager {
      * @return the stream manager
      */
     public StreamManager registerFunctions() {
+
+        tableEnvironment.getConfig().getConfiguration().setString(PYTHON_FILES_KEY, "/opt/flink/lib/python_udf_metrics.zip");
+//        tableEnvironment.getConfig().getConfiguration().setString(PYTHON_FILES_KEY, "/Users/jpandawa/Documents/python/python_udf_metrics.zip");
+//        tableEnvironment.getConfig().getConfiguration().setString("python.files", "/Users/jpandawa/Documents/python/python_udf/test_function_3.py");
+//        tableEnvironment.getConfig().getConfiguration().setString("python.client.executable", "/Users/jpandawa/.pyenv/versions/3.8.5/bin/python");
+//        tableEnvironment.getConfig().getConfiguration().setString("python.executable", "/Users/jpandawa/.pyenv/versions/3.8.5/bin/python");
+//        /*pass here the function.py and the name of the function into the python script*/
+        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTest AS 'python_udf_metrics.test_function.add_test' LANGUAGE PYTHON");
+        tableEnvironment.executeSql("CREATE TEMPORARY FUNCTION AddTestTwo AS 'python_udf_metrics.test_function_2.add_test2' LANGUAGE PYTHON");
+        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTestThree AS 'python_udf_metrics.test_function_3.add_test3' LANGUAGE PYTHON");
+//        tableEnvironment.executeSql("CREATE TEMPORARY SYSTEM FUNCTION AddTestData AS 'test_class_function.AddTestData' LANGUAGE PYTHON");
+
         String[] functionFactoryClasses = configuration
                 .getString(Constants.FUNCTION_FACTORY_CLASSES_KEY, Constants.FUNCTION_FACTORY_CLASSES_DEFAULT)
                 .split(",");
