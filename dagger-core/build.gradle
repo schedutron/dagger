@@ -71,6 +71,7 @@ dependencies {
     implementation 'org.apache.flink:flink-table:' + flinkVersion
     implementation 'org.apache.flink:flink-table-api-java-bridge_2.11:' + flinkVersion
     implementation 'org.apache.flink:flink-table-planner_2.11:' + flinkVersion
+//    implementation 'org.apache.flink:flink-runtime-web_2.11:' + flinkVersion
 //    implementation 'org.apache.flink:flink-python_2.11:' + flinkVersion
 
     dependenciesJar project(path: ':dagger-common', configuration: 'dependenciesCommonJar')
@@ -123,7 +124,7 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             limit {
-                minimum = 0.88
+                minimum = 0.87
             }
         }
     }
